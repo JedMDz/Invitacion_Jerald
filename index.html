@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mis 18 Años - Jerald</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
-  <!-- Fuentes elegantes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
@@ -25,11 +23,7 @@
       --text-muted: #94a3b8;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--bg-dark);
@@ -95,7 +89,6 @@
       background: linear-gradient(135deg, #fff 20%, var(--gold-light) 60%, var(--gold-primary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
       margin-bottom: 4px;
     }
 
@@ -115,7 +108,6 @@
       line-height: 1.5;
     }
 
-    /* Contador */
     .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -145,7 +137,6 @@
       letter-spacing: 1px;
     }
 
-    /* Detalles */
     .event-info {
       background: rgba(7, 13, 10, 0.75);
       border-left: 3px solid var(--gold-primary);
@@ -163,9 +154,7 @@
       margin-bottom: 10px;
     }
 
-    .info-row:last-child {
-      margin-bottom: 0;
-    }
+    .info-row:last-child { margin-bottom: 0; }
 
     .info-icon {
       font-size: 1.2rem;
@@ -173,7 +162,6 @@
       color: var(--gold-primary);
     }
 
-    /* Botón Maps */
     .btn-map {
       display: flex;
       align-items: center;
@@ -197,7 +185,6 @@
       transform: translateY(-2px);
     }
 
-    /* Formulario */
     .rsvp-section {
       background: rgba(15, 56, 34, 0.3);
       border: 1px dashed rgba(212, 175, 55, 0.45);
@@ -269,29 +256,23 @@
       transform: scale(1.02);
     }
 
-    #microsoft-form-container {
-      margin-top: 25px;
-      display: none;
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 12px;
-      overflow: hidden;
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
 
-  <!-- Partículas doradas de fondo -->
   <canvas id="bg-canvas"></canvas>
 
   <div class="container">
     <span class="badge-top">Estás Cordialmente Invitado</span>
-    
-    <!-- Título principal -->
     <h1 class="name-title">JERALD</h1>
     <div class="age-subtitle">MIS 18 AÑOS</div>
     <p class="intro-text">Ven a celebrar conmigo esta noche especial llena de buena música y momentos únicos.</p>
 
-    <!-- Cuenta regresiva -->
+    <!-- Contador -->
     <div class="countdown-grid">
       <div class="count-box"><span class="count-num" id="dias">00</span><span class="count-lbl">Días</span></div>
       <div class="count-box"><span class="count-num" id="horas">00</span><span class="count-lbl">Horas</span></div>
@@ -299,7 +280,7 @@
       <div class="count-box"><span class="count-num" id="segundos">00</span><span class="count-lbl">Seg</span></div>
     </div>
 
-    <!-- Datos del evento -->
+    <!-- Info evento -->
     <div class="event-info">
       <div class="info-row">
         <span class="info-icon">📅</span>
@@ -315,12 +296,11 @@
       </div>
     </div>
 
-    <!-- Enlace Google Maps -->
     <a href="https://goo.gl/maps/UtLTs5tR9SipmVjW8?g_st=aw" target="_blank" class="btn-map">
       🗺️ Ver Ubicación en Google Maps
     </a>
 
-    <!-- Registro por persona -->
+    <!-- Formulario -->
     <div class="rsvp-section">
       <h3 class="rsvp-title">Confirmar Asistencia</h3>
       
@@ -339,9 +319,6 @@
         CONFIRMAR POR WHATSAPP
       </button>
     </div>
-
-    <!-- Contenedor listo para pegar iframe de Microsoft Forms -->
-    <div id="microsoft-form-container"></div>
   </div>
 
   <script>
@@ -387,7 +364,7 @@
     }
     animate();
 
-    // Cuenta regresiva
+    // Contador regresivo
     function updateCountdown() {
       const now = new Date();
       let year = now.getFullYear();
@@ -408,7 +385,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Generador de campos de texto según asistentes
+    // Inputs dinámicos
     function renderNameInputs() {
       const count = parseInt(document.getElementById('num-personas').value);
       const container = document.getElementById('guests-container');
@@ -430,8 +407,8 @@
     }
     renderNameInputs();
 
-    // Confirmación WhatsApp con confeti
-    function enviarConfirmacion() {
+    // Confirmación + Envío a hoja + WhatsApp
+    async function enviarConfirmacion() {
       const inputs = document.querySelectorAll('.guest-name-input');
       const nombres = [];
 
@@ -451,6 +428,27 @@
         colors: ['#d4af37', '#10b981', '#ffffff']
       });
 
+      const btn = document.querySelector('.btn-submit');
+      btn.innerText = "REGISTRANDO...";
+      btn.disabled = true;
+
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwt6hPID8nRuxROcHHT1QDi9bgNdhkGJT8kVgOtBMj6Kw8-Ic5-uzUjjTUMHnmlldrF/exec";
+      const fechaActual = new Date().toLocaleString("es-PE", { timeZone: "America/Lima" });
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fecha: fechaActual,
+            invitados: nombres
+          })
+        });
+      } catch (error) {
+        console.error("Error al registrar:", error);
+      }
+
       const telefono = "51934792511";
       let mensaje = `*¡Hola Jerald! Confirmo mi asistencia para tus 18 años (Sábado 17 de Octubre).*%0A%0A`;
       mensaje += `*Total asistentes:* ${nombres.length}%0A`;
@@ -460,9 +458,12 @@
       });
 
       const url = `https://wa.me/${telefono}?text=${mensaje}`;
+      
       setTimeout(() => {
+        btn.innerText = "CONFIRMAR POR WHATSAPP";
+        btn.disabled = false;
         window.open(url, '_blank');
-      }, 700);
+      }, 600);
     }
   </script>
 </body>
