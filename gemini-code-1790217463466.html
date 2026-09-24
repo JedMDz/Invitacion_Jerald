@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación Especial</title>
+  <!-- Fuentes elegantes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti para animación al confirmar -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #070d0a;
+      --card-bg: rgba(14, 27, 20, 0.85);
+      --green-deep: #0f3822;
+      --green-light: #10b981;
+      --gold-primary: #d4af37;
+      --gold-light: #f7e7a9;
+      --gold-glow: rgba(212, 175, 55, 0.4);
+      --text-white: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-white);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 16px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fondo animado de partículas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      width: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 20px;
+      padding: 36px 24px;
+      box-shadow: 0 0 35px var(--gold-glow), 0 20px 40px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--gold-primary);
+      padding-bottom: 4px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    /* Cuenta regresiva */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .count-box {
+      background: rgba(15, 56, 34, 0.5);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 10px 4px;
+      border-radius: 10px;
+    }
+
+    .count-num {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .count-lbl {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* Detalles del evento */
+    .event-info {
+      background: rgba(7, 13, 10, 0.7);
+      border-left: 3px solid var(--gold-primary);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+      text-align: left;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .info-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-icon {
+      font-size: 1.2rem;
+      margin-right: 12px;
+      color: var(--gold-primary);
+    }
+
+    /* Botón Google Maps */
+    .btn-map {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #134e2b, #0f3822);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-light);
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-map:hover {
+      background: linear-gradient(135deg, #1b683a, #134e2b);
+      box-shadow: 0 0 15px var(--gold-glow);
+      transform: translateY(-2px);
+    }
+
+    /* Formulario de registro */
+    .rsvp-section {
+      background: rgba(15, 56, 34, 0.3);
+      border: 1px dashed rgba(212, 175, 55, 0.4);
+      border-radius: 12px;
+      padding: 20px 16px;
+    }
+
+    .rsvp-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: var(--gold-light);
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.82rem;
+      text-align: left;
+      margin-bottom: 6px;
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    select, input {
+      width: 100%;
+      background: rgba(7, 13, 10, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      margin-bottom: 14px;
+      transition: border-color 0.3s;
+    }
+
+    select:focus, input:focus {
+      border-color: var(--gold-light);
+      box-shadow: 0 0 8px var(--gold-glow);
+    }
+
+    #guests-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* Botón confirmar WhatsApp */
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #d4af37, #aa820a);
+      color: #070d0a;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #f7e7a9, #d4af37);
+      box-shadow: 0 0 20px var(--gold-primary);
+      transform: scale(1.02);
+    }
+
+    /* Espacio reservado para Microsoft Forms */
+    #microsoft-form-container {
+      margin-top: 25px;
+      display: none; /* Se activa cuando pegues el iframe */
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Lienzo de partículas de fondo -->
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="container">
+    <span class="header-badge">Invitación Especial</span>
+    <h1>Nuestra Celebración</h1>
+    <p class="subtitle">Nos encantaría contar con tu presencia en este momento inolvidable.</p>
+
+    <!-- Contador regresivo para el Sábado 17 de Octubre -->
+    <div class="countdown-grid">
+      <div class="count-box"><span class="count-num" id="dias">00</span><span class="count-lbl">Días</span></div>
+      <div class="count-box"><span class="count-num" id="horas">00</span><span class="count-lbl">Horas</span></div>
+      <div class="count-box"><span class="count-num" id="minutos">00</span><span class="count-lbl">Min</span></div>
+      <div class="count-box"><span class="count-num" id="segundos">00</span><span class="count-lbl">Seg</span></div>
+    </div>
+
+    <!-- Detalles del evento -->
+    <div class="event-info">
+      <div class="info-row">
+        <span class="info-icon">📅</span>
+        <div><strong>Fecha:</strong> Sábado, 17 de Octubre</div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">⏰</span>
+        <div><strong>Hora:</strong> 7:00 PM</div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div><strong>Ubicación:</strong> Consulta en el mapa abajo</div>
+      </div>
+    </div>
+
+    <!-- Botón directo de Google Maps -->
+    <a href="https://goo.gl/maps/UtLTs5tR9SipmVjW8?g_st=aw" target="_blank" class="btn-map">
+      🗺️ Ver Ubicación en Google Maps
+    </a>
+
+    <!-- Formulario interactivo por persona -->
+    <div class="rsvp-section">
+      <h3 class="rsvp-title">Confirmar Asistencia</h3>
+      
+      <label for="num-personas">¿Cuántas personas asistirán?</label>
+      <select id="num-personas" onchange="renderNameInputs()">
+        <option value="1">1 Persona</option>
+        <option value="2">2 Personas</option>
+        <option value="3" selected>3 Personas</option>
+        <option value="4">4 Personas</option>
+        <option value="5">5 Personas</option>
+      </select>
+
+      <div id="guests-container"></div>
+
+      <button type="button" class="btn-submit" onclick="enviarConfirmacion()">
+        CONFIRMAR ASISTENCIA
+      </button>
+    </div>
+
+    <!-- Contenedor opcional para Microsoft Forms -->
+    <div id="microsoft-form-container">
+      <!-- Pega aquí tu iframe de Microsoft Forms cuando lo tengas -->
+    </div>
+  </div>
+
+  <script>
+    // 1. Partículas doradas de fondo
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.8;
+        this.speedY = -(Math.random() * 0.4 + 0.2);
+        this.opacity = Math.random() * 0.5 + 0.2;
+      }
+      update() {
+        this.y += this.speedY;
+        if (this.y < 0) this.reset(), this.y = canvas.height;
+      }
+      draw() {
+        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 45; i++) particles.push(new Particle());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // 2. Contador regresivo al 17 de Octubre
+    function updateCountdown() {
+      const now = new Date();
+      let year = now.getFullYear();
+      let target = new Date(`October 17, ${year} 19:00:00`);
+      if (now > target) target = new Date(`October 17, ${year + 1} 19:00:00`);
+
+      const diff = target - now;
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / 1000 / 60) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('dias').innerText = String(d).padStart(2, '0');
+      document.getElementById('horas').innerText = String(h).padStart(2, '0');
+      document.getElementById('minutos').innerText = String(m).padStart(2, '0');
+      document.getElementById('segundos').innerText = String(s).padStart(2, '0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 3. Generación dinámica de inputs para nombres
+    function renderNameInputs() {
+      const count = parseInt(document.getElementById('num-personas').value);
+      const container = document.getElementById('guests-container');
+      container.innerHTML = '';
+
+      for (let i = 1; i <= count; i++) {
+        const label = document.createElement('label');
+        label.innerText = `Nombre completo del asistente ${i}:`;
+        
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = `Ej. Invitado ${i}`;
+        input.className = 'guest-name-input';
+        input.required = true;
+
+        container.appendChild(label);
+        container.appendChild(input);
+      }
+    }
+    renderNameInputs();
+
+    // 4. Enviar lista por WhatsApp con Confeti
+    function enviarConfirmacion() {
+      const inputs = document.querySelectorAll('.guest-name-input');
+      const nombres = [];
+
+      for (let input of inputs) {
+        if (!input.value.trim()) {
+          alert('Por favor completa el nombre de todos los asistentes.');
+          input.focus();
+          return;
+        }
+        nombres.push(input.value.trim());
+      }
+
+      // Animación de confeti dorado y esmeralda
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#d4af37', '#10b981', '#ffffff']
+      });
+
+      const telefono = "51934792511";
+      let mensaje = `*¡Hola! Confirmo asistencia para el evento del Sábado 17 de Octubre.*%0A%0A`;
+      mensaje += `*Total de asistentes:* ${nombres.length}%0A`;
+      mensaje += `*Nombres:*%0A`;
+      nombres.forEach((nombre, idx) => {
+        mensaje += `${idx + 1}. ${nombre}%0A`;
+      });
+
+      const url = `https://wa.me/${telefono}?text=${mensaje}`;
+      setTimeout(() => {
+        window.open(url, '_blank');
+      }, 700);
+    }
+  </script>
+</body>
+</html>
