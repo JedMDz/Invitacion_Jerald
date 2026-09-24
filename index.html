@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invitación Especial</title>
+  <title>Mis 18 Años - Jerald</title>
   <!-- Fuentes elegantes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <!-- Canvas Confetti para animación al confirmar -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
     :root {
       --bg-dark: #070d0a;
-      --card-bg: rgba(14, 27, 20, 0.85);
+      --card-bg: rgba(14, 27, 20, 0.88);
       --green-deep: #0f3822;
       --green-light: #10b981;
       --gold-primary: #d4af37;
       --gold-light: #f7e7a9;
-      --gold-glow: rgba(212, 175, 55, 0.4);
+      --gold-glow: rgba(212, 175, 55, 0.45);
       --text-white: #f8fafc;
       --text-muted: #94a3b8;
     }
@@ -42,7 +43,6 @@
       position: relative;
     }
 
-    /* Fondo animado de partículas */
     #bg-canvas {
       position: fixed;
       top: 0;
@@ -74,35 +74,47 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .header-badge {
+    .badge-top {
       display: inline-block;
       font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 4px;
+      font-size: 0.85rem;
+      letter-spacing: 5px;
       color: var(--gold-light);
       text-transform: uppercase;
       border-bottom: 1px solid var(--gold-primary);
       padding-bottom: 4px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
-    h1 {
+    .name-title {
       font-family: 'Cinzel', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-      margin-bottom: 10px;
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #fff 20%, var(--gold-light) 60%, var(--gold-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+      margin-bottom: 4px;
     }
 
-    .subtitle {
+    .age-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+    }
+
+    .intro-text {
       font-size: 0.95rem;
       color: var(--text-muted);
       margin-bottom: 24px;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
-    /* Cuenta regresiva */
+    /* Contador */
     .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -119,7 +131,7 @@
 
     .count-num {
       font-family: 'Cinzel', serif;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 700;
       color: var(--gold-light);
       display: block;
@@ -132,13 +144,13 @@
       letter-spacing: 1px;
     }
 
-    /* Detalles del evento */
+    /* Detalles */
     .event-info {
-      background: rgba(7, 13, 10, 0.7);
+      background: rgba(7, 13, 10, 0.75);
       border-left: 3px solid var(--gold-primary);
       border-radius: 8px;
       padding: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       text-align: left;
       font-size: 0.92rem;
       line-height: 1.6;
@@ -160,7 +172,7 @@
       color: var(--gold-primary);
     }
 
-    /* Botón Google Maps */
+    /* Botón Maps */
     .btn-map {
       display: flex;
       align-items: center;
@@ -174,7 +186,7 @@
       border-radius: 10px;
       font-weight: 600;
       font-size: 0.9rem;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
       transition: all 0.3s ease;
     }
 
@@ -184,10 +196,10 @@
       transform: translateY(-2px);
     }
 
-    /* Formulario de registro */
+    /* Formulario */
     .rsvp-section {
       background: rgba(15, 56, 34, 0.3);
-      border: 1px dashed rgba(212, 175, 55, 0.4);
+      border: 1px dashed rgba(212, 175, 55, 0.45);
       border-radius: 12px;
       padding: 20px 16px;
     }
@@ -233,7 +245,6 @@
       gap: 4px;
     }
 
-    /* Botón confirmar WhatsApp */
     .btn-submit {
       width: 100%;
       background: linear-gradient(135deg, #d4af37, #aa820a);
@@ -257,10 +268,9 @@
       transform: scale(1.02);
     }
 
-    /* Espacio reservado para Microsoft Forms */
     #microsoft-form-container {
       margin-top: 25px;
-      display: none; /* Se activa cuando pegues el iframe */
+      display: none;
       border: 1px solid rgba(212, 175, 55, 0.3);
       border-radius: 12px;
       overflow: hidden;
@@ -269,15 +279,18 @@
 </head>
 <body>
 
-  <!-- Lienzo de partículas de fondo -->
+  <!-- Partículas doradas de fondo -->
   <canvas id="bg-canvas"></canvas>
 
   <div class="container">
-    <span class="header-badge">Invitación Especial</span>
-    <h1>Nuestra Celebración</h1>
-    <p class="subtitle">Nos encantaría contar con tu presencia en este momento inolvidable.</p>
+    <span class="badge-top">Estás Cordialmente Invitado</span>
+    
+    <!-- Título principal -->
+    <h1 class="name-title">JERALD</h1>
+    <div class="age-subtitle">MIS 18 AÑOS</div>
+    <p class="intro-text">Ven a celebrar conmigo esta noche especial llena de buena música y momentos únicos.</p>
 
-    <!-- Contador regresivo para el Sábado 17 de Octubre -->
+    <!-- Cuenta regresiva -->
     <div class="countdown-grid">
       <div class="count-box"><span class="count-num" id="dias">00</span><span class="count-lbl">Días</span></div>
       <div class="count-box"><span class="count-num" id="horas">00</span><span class="count-lbl">Horas</span></div>
@@ -285,7 +298,7 @@
       <div class="count-box"><span class="count-num" id="segundos">00</span><span class="count-lbl">Seg</span></div>
     </div>
 
-    <!-- Detalles del evento -->
+    <!-- Datos del evento -->
     <div class="event-info">
       <div class="info-row">
         <span class="info-icon">📅</span>
@@ -297,16 +310,16 @@
       </div>
       <div class="info-row">
         <span class="info-icon">📍</span>
-        <div><strong>Ubicación:</strong> Consulta en el mapa abajo</div>
+        <div><strong>Lugar:</strong> Consulta la ubicación directa abajo</div>
       </div>
     </div>
 
-    <!-- Botón directo de Google Maps -->
+    <!-- Enlace Google Maps -->
     <a href="https://goo.gl/maps/UtLTs5tR9SipmVjW8?g_st=aw" target="_blank" class="btn-map">
       🗺️ Ver Ubicación en Google Maps
     </a>
 
-    <!-- Formulario interactivo por persona -->
+    <!-- Registro por persona -->
     <div class="rsvp-section">
       <h3 class="rsvp-title">Confirmar Asistencia</h3>
       
@@ -322,18 +335,16 @@
       <div id="guests-container"></div>
 
       <button type="button" class="btn-submit" onclick="enviarConfirmacion()">
-        CONFIRMAR ASISTENCIA
+        CONFIRMAR POR WHATSAPP
       </button>
     </div>
 
-    <!-- Contenedor opcional para Microsoft Forms -->
-    <div id="microsoft-form-container">
-      <!-- Pega aquí tu iframe de Microsoft Forms cuando lo tengas -->
-    </div>
+    <!-- Contenedor listo para pegar iframe de Microsoft Forms -->
+    <div id="microsoft-form-container"></div>
   </div>
 
   <script>
-    // 1. Partículas doradas de fondo
+    // Partículas de fondo
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -346,9 +357,7 @@
     resize();
 
     class Particle {
-      constructor() {
-        this.reset();
-      }
+      constructor() { this.reset(); }
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
@@ -358,7 +367,7 @@
       }
       update() {
         this.y += this.speedY;
-        if (this.y < 0) this.reset(), this.y = canvas.height;
+        if (this.y < 0) { this.reset(); this.y = canvas.height; }
       }
       draw() {
         ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
@@ -377,7 +386,7 @@
     }
     animate();
 
-    // 2. Contador regresivo al 17 de Octubre
+    // Cuenta regresiva
     function updateCountdown() {
       const now = new Date();
       let year = now.getFullYear();
@@ -398,7 +407,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 3. Generación dinámica de inputs para nombres
+    // Generador de campos de texto según asistentes
     function renderNameInputs() {
       const count = parseInt(document.getElementById('num-personas').value);
       const container = document.getElementById('guests-container');
@@ -410,7 +419,7 @@
         
         const input = document.createElement('input');
         input.type = 'text';
-        input.placeholder = `Ej. Invitado ${i}`;
+        input.placeholder = `Ej. Nombre y Apellido`;
         input.className = 'guest-name-input';
         input.required = true;
 
@@ -420,34 +429,33 @@
     }
     renderNameInputs();
 
-    // 4. Enviar lista por WhatsApp con Confeti
+    // Confirmación WhatsApp con confeti
     function enviarConfirmacion() {
       const inputs = document.querySelectorAll('.guest-name-input');
       const nombres = [];
 
       for (let input of inputs) {
         if (!input.value.trim()) {
-          alert('Por favor completa el nombre de todos los asistentes.');
+          alert('Por favor escribe el nombre de todos los invitados.');
           input.focus();
           return;
         }
         nombres.push(input.value.trim());
       }
 
-      // Animación de confeti dorado y esmeralda
       confetti({
-        particleCount: 100,
-        spread: 70,
+        particleCount: 110,
+        spread: 75,
         origin: { y: 0.6 },
         colors: ['#d4af37', '#10b981', '#ffffff']
       });
 
       const telefono = "51934792511";
-      let mensaje = `*¡Hola! Confirmo asistencia para el evento del Sábado 17 de Octubre.*%0A%0A`;
-      mensaje += `*Total de asistentes:* ${nombres.length}%0A`;
-      mensaje += `*Nombres:*%0A`;
-      nombres.forEach((nombre, idx) => {
-        mensaje += `${idx + 1}. ${nombre}%0A`;
+      let mensaje = `*¡Hola Jerald! Confirmo mi asistencia para tus 18 años (Sábado 17 de Octubre).*%0A%0A`;
+      mensaje += `*Total asistentes:* ${nombres.length}%0A`;
+      mensaje += `*Invitados:*%0A`;
+      nombres.forEach((nom, i) => {
+        mensaje += `${i + 1}. ${nom}%0A`;
       });
 
       const url = `https://wa.me/${telefono}?text=${mensaje}`;
