@@ -624,14 +624,14 @@ select, input { font-size: 16px; border-radius: 10px; padding: 13px 14px; border
           <div class="rsvp-section">
             <span class="eyebrow">¿Nos vemos?</span>
             <h3 class="rsvp-title" id="rsvp-title">Confirma tu asistencia</h3>
-            <p class="rsvp-subtitle">Elige tus pases y completa los nombres para confirmar tu asistencia.</p>
-            <label for="num-personas">Número de pases / asistentes</label>
+            <p class="rsvp-subtitle">Elige las Personas y completa los nombres para confirmar tu asistencia.</p>
+            <label for="num-personas">Número de Personas / asistentes</label>
             <select id="num-personas" onchange="renderNameInputs()">
-              <option value="1" selected="">1 Pase (Solo yo)</option>
-              <option value="2">2 Pases</option>
-              <option value="3">3 Pases</option>
-              <option value="4">4 Pases</option>
-              <option value="5">5 Pases</option>
+              <option value="1" selected="">1 Persona (Solo yo)</option>
+              <option value="2">2 Personas</option>
+              <option value="3">3 Personas</option>
+              <option value="4">4 Personas</option>
+              <option value="5">5 Personas</option>
             </select>
             <div id="guests-container"><div class="input-field-anim"><label>Nombre completo del asistente #1:</label><input type="text" placeholder="Ingresa nombre y apellido" class="guest-name-input" required=""></div></div>
             <button type="button" class="btn-submit" onclick="enviarConfirmacion()">CONFIRMAR ASISTENCIA</button>
@@ -940,7 +940,7 @@ select, input { font-size: 16px; border-radius: 10px; padding: 13px 14px; border
 
       const telefono = "51934792511";
       let mensaje = `*¡Hola Jerald! Confirmo mi asistencia para tu fiesta de 18 años (Sábado 17 de Octubre - 9:00 PM).* 🎉%0A%0A`;
-      mensaje += `*Total de pases:* ${nombres.length}%0A`;
+      mensaje += `*Total de Personas:* ${nombres.length}%0A`;
       mensaje += `*Lista de asistentes:*%0A`;
       nombres.forEach((nom) => {
         mensaje += `• ${nom}%0A`;
