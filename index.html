@@ -205,7 +205,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
 .age-subtitle { font-size: 10px; letter-spacing: 4px; color: var(--gold-primary); margin: 13px 0 21px; text-transform: uppercase; }
 .intro-text { max-width: 460px; margin: 0 auto; color: var(--text-muted); font-size: 12px; line-height: 1.95; text-wrap: pretty; }
 .intro-text strong { color: var(--gold-light); font-weight: 500; }
-.hero-meta { display: flex; justify-content: center; gap: 14px; align-items: center; margin-top: 23px; color: var(--gold-light); font-size: 10px; letter-spacing: 1.8px; }
+.hero-meta { display: flex; justify-content: center; gap: 14px; align-items: center; margin-top: 23px; color: var(--gold-light); font-size: 12px; letter-spacing: 1.8px; }
 .hero-meta i { width: 4px; height: 4px; background: var(--gold-primary); transform: rotate(45deg); }
 .ornament-divider { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 40px; color: var(--gold-primary); font-size: 13px; }
 .ornament-divider::before, .ornament-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,.4)); }
@@ -227,10 +227,10 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
 .luxury-icon { width: 36px; height: 36px; flex-shrink: 0; color: var(--gold-primary); display: grid; place-items: center; background: rgba(16,185,129,.055); border: 1px solid rgba(212,175,55,.2); border-radius: 5px; }
 .luxury-icon svg { width: 18px; height: 18px; }
 .luxury-content { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-.luxury-label { font-size: 8px; letter-spacing: 2px; color: var(--gold-primary); text-transform: uppercase; }
-.luxury-value { font-size: 11px; line-height: 1.65; color: var(--text-white); font-weight: 500; }
+.luxury-label { font-family: var(--serif); font-size: 9px; letter-spacing: 2px; color: var(--gold-primary); text-transform: uppercase; }
+.luxury-value { font-size: 12px; line-height: 1.65; color: var(--text-white); font-weight: 500; }
 .luxury-divider { height: 1px; background: rgba(212,175,55,.13); }
-.personal-quote { position: relative; margin: 0 0 21px; padding: 13px 0 13px 16px; border-left: 1px solid var(--gold-primary); color: var(--text-muted); font-family: var(--serif); font-size: 12px; line-height: 1.85; text-wrap: pretty; }
+.personal-quote { position: relative; margin: 0 0 21px; padding: 13px 0 13px 16px; border-left: 1px solid var(--gold-primary); color: var(--text-muted); font-family: var(--sans); font-size: 12px; line-height: 1.85; text-wrap: pretty; }
 .btn-action-row { display: flex; flex-direction: column; gap: 9px; }
 .btn-action { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 13px 10px; min-height: 45px; border-radius: 5px; background: linear-gradient(135deg, #134e2b, #0c2b1a); border: 1px solid rgba(212,175,55,.45); color: var(--gold-light); text-decoration: none; font-size: 10px; font-weight: 600; transition: transform .25s, background .25s, border-color .25s; }
 .btn-action .icon { width: 16px; height: 16px; }
@@ -408,8 +408,8 @@ body { padding: 70px 18px 36px; }
 .emblem-caption { bottom: -4px; border-radius: 20px; letter-spacing: 3px; font-size: 8px; background: #10251a; }
 .intro-text { font-size: 13px; line-height: 1.85; max-width: 385px; }
 .intro-text strong { font-weight: 600; }
-.hero-meta { font-size: 11px; letter-spacing: 1px; margin-top: 22px; }
-.hero-meta span { background: rgba(212,175,55,.07); padding: 8px 11px; border-radius: 20px; border: 1px solid rgba(212,175,55,.23); }
+.hero-meta { font-size: 12px; letter-spacing: 1.2px; margin-top: 22px; }
+.hero-meta span { background: linear-gradient(135deg, rgba(212,175,55,.12), rgba(16,185,129,.07)); padding: 9px 13px; border-radius: 20px; border: 1px solid rgba(212,175,55,.38); font-weight: 600; text-shadow: 0 0 10px rgba(251,238,168,.18); }
 .hero-meta i { animation: diamondTurn 4s ease-in-out infinite; }
 .ornament-divider { margin: 0 30px; font-size: 20px; text-shadow: 0 0 13px var(--gold-primary); }
 .details-layout { display: grid; grid-template-columns: 1fr; gap: 25px; padding: 25px 30px 29px; }
@@ -484,7 +484,7 @@ select, input { font-size: 16px; border-radius: 10px; padding: 13px 14px; border
   .intro-text { font-size: 13px; }
   .hero-emblem { width: 152px; height: 145px; }
   .hero-age { font-size: 101px; }
-  .hero-meta { font-size: 10px; gap: 9px; }
+  .hero-meta { font-size: 11px; gap: 9px; }
   .ornament-divider { margin: 0 24px; }
   .details-layout { padding: 23px 24px 26px; }
   .countdown-grid { gap: 8px; }
@@ -501,7 +501,7 @@ select, input { font-size: 16px; border-radius: 10px; padding: 13px 14px; border
 }
 @media (max-width: 360px) {
   .details-layout { padding-left: 18px; padding-right: 18px; }
-  .luxury-value { font-size: 11px; }
+  .luxury-value { font-size: 12px; }
   .btn-action, .btn-share { font-size: 11px; }
   .btn-submit { font-size: 9px; letter-spacing: .7px; }
   .welcome-card { padding-left: 22px; padding-right: 22px; }
@@ -597,8 +597,12 @@ select, input { font-size: 16px; border-radius: 10px; padding: 13px 14px; border
 
           <div class="event-info-luxury">
             <div class="luxury-item">
-              <div class="luxury-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#icon-calendar"></use></svg></div>
-              <div class="luxury-content"><span class="luxury-label">Fecha de la celebración</span><span class="luxury-value">Sábado, 17 de Octubre de 2026</span></div>
+<div class="luxury-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>              <div class="luxury-content"><span class="luxury-label">Fecha de la celebración</span><span class="luxury-value">Sábado, 17 de Octubre de 2026</span></div>
             </div>
             <div class="luxury-divider"></div>
             <div class="luxury-item">
@@ -606,13 +610,33 @@ select, input { font-size: 16px; border-radius: 10px; padding: 13px 14px; border
               <div class="luxury-content"><span class="luxury-label">Hora de recepción</span><span class="luxury-value">9:00 PM</span></div>
             </div>
             <div class="luxury-divider"></div>
-            <div class="luxury-item">
-              <div class="luxury-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#icon-pin"></use></svg></div>
-              <div class="luxury-content"><span class="luxury-label">Ubicación</span><span class="luxury-value">Ver coordenadas en el mapa</span></div>
-              <div class="luxury-content"><span class="luxury-label">Dirección</span><span class="luxury-value">Psje. Juan Quispe Lote 3 Mz B, Barrio El Porvenir - Grocio Prado</span></div>
-
-            </div>
+               <div class="luxury-item">
+          <div class="luxury-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
           </div>
+          <div class="luxury-content">
+            <span class="luxury-label">HORA DE RECEPCIÓN</span>
+            <span class="luxury-value">9:00 PM</span>
+          </div>
+        </div>
+
+        <div class="luxury-divider"></div>
+
+        <div class="luxury-item">
+          <div class="luxury-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <div class="luxury-content">
+            <span class="luxury-label">UBICACIÓN</span>
+            <span class="luxury-value">Ver coordenadas en el mapa<br>Psje. Juan Quispe Lt 3 Mz B - Grocio Prado.</span>
+          </div>
+        </div>
 
           <blockquote class="personal-quote">“Un nuevo capítulo, nuevos sueños y muchas historias por vivir.”</blockquote>
 
@@ -955,7 +979,7 @@ select, input { font-size: 16px; border-radius: 10px; padding: 13px 14px; border
         btn.disabled = false;
         window.open(url, '_blank');
       }, 700);
-    }
+    } 
 
     function compartirInvitacion() {
       const shareUrl = "https://jedmdz.github.io/Invitacion_Jerald/";
